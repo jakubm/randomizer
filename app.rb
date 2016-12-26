@@ -105,6 +105,13 @@ __END__
         <li><a href="/flightnumber.json">Flight number in JSON object</a></li>
         <li><a href="/flightnumber.json/10">Multiple flight numbers in JSON array</a></li>
       </ul>
+      <h2>FFaker</h2>
+      <h4>JSON interface only</h4>
+      <ul>
+        <li><a href="/ffaker/">Modules</a></li>
+        <li><a href="/ffaker/airline">Methods</a></li>
+        <li><a href="/ffaker/airline/name">Method call</a></li>
+      </ul>
     </nav>
   </header>
 </body>
