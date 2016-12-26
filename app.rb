@@ -44,11 +44,19 @@ get '/ffaker' do
   faker_modules.to_json
 end
 
+get '/ffaker/:module/:method' do
+  content_type :json
+  result = faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module])}.first
+  { "#{params[:method]}": result.send(params[:method])}.to_json
+end
+
 get '/ffaker/:module' do
   content_type :json
   result = faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module])}
-  result.to_json
+  result[0].instance_methods.to_json
 end
+
+
 
 __END__
 @@home
