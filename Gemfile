@@ -4,3 +4,5 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 gem 'ffaker'
+
+gem 'pry'

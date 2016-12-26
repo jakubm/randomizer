@@ -1,9 +1,11 @@
 require 'sinatra'
-require "sinatra/reloader" if development?
+require 'sinatra/reloader' if development?
 
 require 'ffaker'
 
 require 'json'
+
+require 'pry'
 
 get '/' do
   erb :home
@@ -22,6 +24,29 @@ get '/name.json/:count' do
   content_type :json
   result = []
   params[:count].to_i.times { result << FFaker::Name.name }
+  result.to_json
+end
+
+def faker_modules
+  FFaker.constants.map do |const|
+    mod = FFaker.const_get(const)
+    next unless mod.is_a?(Module)
+    next if mod == FFaker::ArrayUtils
+    next if mod == FFaker::ModuleUtils
+    next if mod == FFaker::RandomUtils
+    next if mod == FFaker::Random
+    mod
+  end.compact
+end
+
+get '/ffaker' do
+  content_type :json
+  faker_modules.to_json
+end
+
+get '/ffaker/:module' do
+  content_type :json
+  result = faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module])}
   result.to_json
 end
 
