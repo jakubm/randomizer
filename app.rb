@@ -5,8 +5,6 @@ require 'ffaker'
 
 require 'json'
 
-require 'pry'
-
 get '/' do
   erb :home
 end
@@ -39,21 +37,23 @@ def faker_modules
   end.compact
 end
 
-get '/ffaker' do
-  content_type :json
-  faker_modules.to_json
+def ffaker_module
+  faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module]) }.first
 end
 
 get '/ffaker/:module/:method' do
   content_type :json
-  result = faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module])}.first
-  { "#{params[:method]}": result.send(params[:method])}.to_json
+  { "#{params[:method]}": ffaker_module.send(params[:method])}.to_json
 end
 
 get '/ffaker/:module' do
   content_type :json
-  result = faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module])}
-  result[0].instance_methods.to_json
+  ffaker_module.instance_methods.to_json
+end
+
+get '/ffaker/' do
+  content_type :json
+  faker_modules.to_json
 end
 
 
