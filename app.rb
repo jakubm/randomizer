@@ -65,6 +65,35 @@ def ffaker_module
   faker_modules.select { |m| m.to_s.downcase.end_with?(params[:module]) }.first
 end
 
+get '/ffaker/:module/all/:count' do
+  content_type :json
+  result = []
+  params[:count].to_i.times do
+    obj = {}
+    ffaker_module.instance_methods.each do |m|
+      obj["#{m.to_s}"] = ffaker_module.send(m)
+    end
+    result << obj
+  end
+  result.to_json
+end
+
+get '/ffaker/:module/:method/:count' do
+  content_type :json
+  result = []
+  params[:count].to_i.times { result << ffaker_module.send(params[:method]) }
+  result.to_json
+end
+
+get '/ffaker/:module/all' do
+  content_type :json
+  result = {}
+  ffaker_module.instance_methods.each do |m|
+    result["#{m.to_s}"] = ffaker_module.send(m)
+  end
+  result.to_json
+end
+
 get '/ffaker/:module/:method' do
   content_type :json
   { "#{params[:method]}": ffaker_module.send(params[:method])}.to_json
@@ -111,6 +140,9 @@ __END__
         <li><a href="/ffaker/">Modules</a></li>
         <li><a href="/ffaker/airline">Methods</a></li>
         <li><a href="/ffaker/airline/name">Method call</a></li>
+        <li><a href="/ffaker/airline/name/10">Method call with multiple results</a></li>
+        <li><a href="/ffaker/airline/all">Method call for complete module results</a></li>
+        <li><a href="/ffaker/airline/all/5">Method call for multiple complete module results</a></li>
       </ul>
     </nav>
   </header>
