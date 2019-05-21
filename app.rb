@@ -150,6 +150,7 @@ __END__
     </nav>
   </header>
   Hostname is <%= Socket.gethostname %><br/>
-  IP address is <%= Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3] %>
+  IP address is <%= Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3] %><br/>
+  Uptime: <%= `uptime` %>
 </body>
 </html>
