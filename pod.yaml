@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: randomizer-pod
+  labels:
+    component: web
+spec:
+  containers:
+    - name: randomizer
+      image: jakubmi/randomizer
+      ports:
+        - containerPort: 4567
