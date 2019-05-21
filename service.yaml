@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 3000
+    - port: 4567
       targetPort: 4567
       nodePort: 31515
   selector:
