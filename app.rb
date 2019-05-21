@@ -4,6 +4,7 @@ require 'sinatra/reloader' if development?
 require 'ffaker'
 
 require 'json'
+require 'socket'
 
 set :bind, '0.0.0.0'
 
@@ -148,6 +149,7 @@ __END__
       </ul>
     </nav>
   </header>
-  Hostname is <%= Socket.gethostname %>
+  Hostname is <%= Socket.gethostname %><br/>
+  IP address is <%= Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3] %>
 </body>
 </html>
