@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: randomizer
-      image: jakubmi/randomizer
+      image: jakubmi/randomizer:1.0
       ports:
         - containerPort: 4567
