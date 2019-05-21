@@ -148,5 +148,6 @@ __END__
       </ul>
     </nav>
   </header>
+  Hostname is <%= Socket.gethostname %>
 </body>
 </html>
