@@ -9,4 +9,4 @@ spec:
       targetPort: 8080
       nodePort: 31515
   selector:
-    component: web
+    app: randomizer

@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: randomizer-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      component: web
+      app: randomizer
   template:
     metadata:
       labels:
-        component: web
+        app: randomizer
     spec:
       containers:
         - name: randomizer
