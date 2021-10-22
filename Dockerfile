@@ -5,4 +5,4 @@ COPY Gemfile* ./
 RUN bundle install
 COPY app.rb .
 EXPOSE 8080
-CMD ["ruby","app.rb"]
+CMD ["ruby","app.rb", "2>&1"]
